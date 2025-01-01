@@ -67,3 +67,51 @@ name: Názov žánru (napr. "komédia").
 4. ERD diagram
 Nasledujúci diagram znázorňuje vzťahy medzi tabuľkami:
 .![MovieLens_ERD](https://github.com/user-attachments/assets/f72dd756-0d32-460f-9cce-0944ec9721b6)
+2. Návrh dimenzionálneho modelu
+Návrh dimenzionálneho modelu
+Pre projekt sme navrhli multi-dimenzionálny model typu hviezda, ktorý umožňuje efektívnu analýzu hodnotení filmov používateľmi. Model obsahuje faktovú tabuľku fact_ratings a viacero dimenzií.
+
+Hlavné tabuľky v modeli:
+fact_ratings (Faktová tabuľka):
+
+Obsahuje kľúčové metriky a prepojenie na dimenzie.
+Atribúty:
+rating_id: Unikátny identifikátor hodnotenia.
+rating: Hodnotenie (1–5).
+rated_at: Dátum a čas hodnotenia.
+user_id: Identifikátor používateľa (väzba na dim_users).
+movie_id: Identifikátor filmu (väzba na dim_movies).
+dim_time_time_id: Identifikátor času (väzba na dim_time).
+dim_users (Dimeznia používateľov):
+
+Obsahuje údaje o používateľoch, ako vekové skupiny a zamestnanie.
+Atribúty:
+user_id: Unikátny identifikátor používateľa.
+gender: Pohlavie.
+age_group_id: Identifikátor vekovej skupiny.
+occupation_id: Identifikátor povolania.
+zip_code: PSČ používateľa.
+dim_movies (Dimenzia filmov):
+
+Obsahuje údaje o filmoch.
+Atribúty:
+movie_id: Unikátny identifikátor filmu.
+title: Názov filmu.
+release_year: Rok vydania filmu.
+dim_genres a movies_genres (Dimenzia žánrov a vzťahy):
+
+Obsahuje údaje o žánroch a vzťah medzi filmami a žánrami.
+Atribúty:
+genre_id: Identifikátor žánru.
+name: Názov žánru.
+dim_time (Dimenzia času):
+
+Umožňuje analyzovať údaje podľa dátumu, mesiaca, roku a hodiny.
+Atribúty:
+time_id: Unikátny identifikátor času.
+day, month, year, hour: Dátumové a časové údaje.
+day_of_week: Deň v týždni.
+ERD diagram:
+Model je vizualizovaný na nasledujúcom ERD diagrame:
+![MovieLens_ERD](https://github.com/user-attachments/assets/abf6da26-6f44-4597-b5e7-06bca940f9a5)
+
