@@ -6,6 +6,7 @@ Tento projekt sa zameriava na analýzu údajov z databázy MovieLens. Dáta zah�
 Určiť populárne filmy a žánre.
 Analyzovať preferencie používateľov.
 Skúmať správanie používateľov na základe hodnotení.
+
 2. Typ dát
 Databáza obsahuje štruktúrované dáta vrátane číselných, textových a časových polí. Formát dát je MySQL dump, ktorý je potrebné spracovať a nahrať do Snowflake.
 
