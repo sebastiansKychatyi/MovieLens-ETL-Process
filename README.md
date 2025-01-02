@@ -1,17 +1,17 @@
 <h1>ETL Proces pre databázu MovieLens</h1>
 <h2>1. Úvod a popis zdrojových dát</h2>
 <h3>1.1 Téma projektu</h3>
-Tento projekt sa zameriava na analýzu údajov z databázy MovieLens. Dáta zahŕňajú informácie o používateľoch, filmoch, žánroch a používateľských hodnoteniach.
+<p>Tento projekt sa zameriava na analýzu údajov z databázy MovieLens. Dáta zahŕňajú informácie o používateľoch, filmoch, žánroch a používateľských hodnoteniach.
 Hlavným cieľom projektu je vytvoriť ETL proces v Snowflake na prípravu dát pre analýzu a budovanie modelu, ktorý umožňuje:
 
 Určiť populárne filmy a žánre.
 Analyzovať preferencie používateľov.
-Skúmať správanie používateľov na základe hodnotení.
-1.2 Typ dát
-Databáza obsahuje štruktúrované dáta vrátane číselných, textových a časových polí.
-Formát dát je MySQL dump, ktorý je potrebné spracovať a nahrať do Snowflake.
+Skúmať správanie používateľov na základe hodnotení.</p>
+<h3>1.2 Typ dát</h3>
+<p>Databáza obsahuje štruktúrované dáta vrátane číselných, textových a časových polí.
+Formát dát je MySQL dump, ktorý je potrebné spracovať a nahrať do Snowflake.</p>
 
-1.3 Popis jednotlivých tabuliek
+<h3>1.3 Popis jednotlivých tabuliek</h3>
 age_group
 Popis: Kategórie vekových skupín používateľov.
 Hlavné stĺpce:
