@@ -135,4 +135,37 @@ Pre projekt bol navrhnutý multi-dimenzionálny model typu hviezda. Tento model 
 - Priemerné hodnotenia filmov.
 - Počet filmov podľa žánrov.
 - Preferencie používateľov podľa vekových skupín.
+## 4. Vizualizácia dát
+
+V tejto sekcii projektu sa zameriavame na prezentáciu vizuálnych analýz, ktoré poskytujú hlbšie pochopenie údajov o filmoch a používateľoch z databázy MovieLens. Vizualizácie sú navrhnuté tak, aby odpovedali na kľúčové otázky a odhalili zaujímavé trendy a vzorce v dátach.
+
+### 4.1 Priemerné hodnotenia filmov
+**Popis:** Graf zobrazuje priemerné hodnotenia pre top hodnotené filmy.  
+**Účel:** Identifikuje filmy s najvyššími hodnoteniami, čo môže pomôcť pri odporúčaniach pre používateľov alebo pri analýze kvality filmových obsahov.
+
+### 4.2 Počet filmov podľa žánrov
+**Popis:** Tento graf prezentuje rozdelenie filmov podľa žánrov.  
+**Účel:** Poskytuje prehľad o popularite jednotlivých žánrov, čo môže byť užitočné pre filmové distribučné spoločnosti alebo marketérov.
+
+### 4.3 Rozloženie hodnotení filmov
+**Popis:** Zobrazuje distribúciu hodnotení medzi používateľmi.  
+**Účel:** Analyzuje ako používatelia hodnotia filmy a môže odhaliť prípadnú prísťnosť alebo štedrosť v ich hodnoteniach.
+
+### 4.4 Počet hodnotení podľa vekových skupín
+**Popis:** Graf ukazuje počet hodnotení podľa vekových skupín používateľov.  
+**Účel:** Skúma, ako vekové rozdiely ovplyvňujú filmové preferencie a hodnotenie.
+
+### 4.5 Historický vývoj počtu filmov
+**Popis:** Tento graf ilustruje trend v počte vydaných filmov počas rôznych rokov.  
+**Účel:** Umožňuje sledovať ako sa kinematografia vyvíjala v čase a reaguje na zmeny v kultúrnych a technologických trendoch.
+
+### Náhľady vizualizácií
+Pre lepšiu predstavivosť sú tu príklady vizualizácií vygenerovaných z našich analytických procesov:
+
+![Priemerné hodnotenia filmov](https://github.com/sebastiansKychatyi/MovieLens-ETL-Process/blob/main/images/average_ratings.png)
+![Počet filmov podľa žánrov](https://github.com/sebastiansKychatyi/MovieLens-ETL-Process/blob/main/images/movie_counts_by_genre.png)
+![Rozloženie hodnotení filmov](https://github.com/sebastiansKychatyi/MovieLens-ETL-Process/blob/main/images/rating_distribution.png)
+![Počet hodnotení podľa vekových skupín](https://github.com/sebastiansKychatyi/MovieLens-ETL-Process/blob/main/images/ratings_by_age_group.png)
+![Historický vývoj počtu filmov](https://github.com/sebastiansKychatyi/MovieLens-ETL-Process/blob/main/images/historical_movie_trends.png)
+
   
