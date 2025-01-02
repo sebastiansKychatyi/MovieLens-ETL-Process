@@ -1,7 +1,4 @@
-
-Вот красиво оформленный файл README.md для вашего проекта:
-
-ETL Proces pre databázu MovieLens
+<h1>ETL Proces pre databázu MovieLens</h1>
 1. Úvod a popis zdrojových dát
 1.1 Téma projektu
 Tento projekt sa zameriava na analýzu údajov z databázy MovieLens. Dáta zahŕňajú informácie o používateľoch, filmoch, žánroch a používateľských hodnoteniach.
