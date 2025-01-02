@@ -131,7 +131,7 @@ Pre projekt bol navrhnutý multi-dimenzionálny model typu hviezda. Tento model 
   ORDER BY total_movies DESC
   LIMIT 10;
 ### 3.3 Vizualizácie
-- Navrhnite vizualizácie, ktoré ukazujú:
+* Navrhnite vizualizácie, ktoré ukazujú:
 * Priemerné hodnotenia filmov.
 * Počet filmov podľa žánrov.
 * Preferencie používateľov podľa vekových skupín.
