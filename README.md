@@ -1,102 +1,79 @@
-<h1>ETL Proces pre databázu MovieLens</h1>
+# ETL Process for the MovieLens Database
 
-<h2>1. Úvod a popis zdrojových dát</h2>
+## 1. Introduction and Data Overview
 
-<h3>1.1 Téma projektu</h3>
-<p>
-    Tento projekt sa zameriava na analýzu údajov z databázy MovieLens. Dáta zahŕňajú informácie o používateľoch, filmoch, žánroch a používateľských hodnoteniach. 
-    Hlavným cieľom projektu je vytvoriť ETL proces v Snowflake na prípravu dát pre analýzu a budovanie modelu, ktorý umožňuje:
-</p>
-<ul>
-    <li>Určiť populárne filmy a žánre.</li>
-    <li>Analyzovať preferencie používateľov.</li>
-    <li>Skúmať správanie používateľov na základe hodnotení.</li>
-</ul>
+### 1.1 Project Theme
+This project focuses on analyzing data from the MovieLens database. The data includes information about users, movies, genres, and user ratings. The main objectives are to develop an ETL process in Snowflake to prepare the data for analysis and create models that enable:
+- Identification of popular movies and genres.
+- Analysis of user preferences.
+- Examination of user behavior based on ratings.
 
-<h3>1.2 Typ dát</h3>
-<p>
-    Databáza obsahuje štruktúrované dáta vrátane číselných, textových a časových polí. 
-    Formát dát je MySQL dump, ktorý je potrebné spracovať a nahrať do Snowflake.
-</p>
+### 1.2 Data Type
+The database contains structured data, including numerical, textual, and temporal fields. The data is provided in a MySQL dump format and needs to be processed and loaded into Snowflake.
 
-<h3>1.3 Popis jednotlivých tabuliek</h3>
-<ul>
-    <li>
-        <strong>age_group</strong>: 
-        <ul>
-            <li>Popis: Kategórie vekových skupín používateľov.</li>
-            <li>Hlavné stĺpce:
-                <ul>
-                    <li>id: Unikátny identifikátor vekovej skupiny.</li>
-                    <li>name: Názov vekovej skupiny (napr. "18-24").</li>
-                </ul>
-            </li>
-        </ul>
-    </li>
-    <li>
-        <strong>occupations</strong>: 
-        <ul>
-            <li>Popis: Zoznam povolaní používateľov.</li>
-            <li>Hlavné stĺpce:
-                <ul>
-                    <li>id: Unikátny identifikátor povolania.</li>
-                    <li>name: Názov povolania (napr. "inžinier").</li>
-                </ul>
-            </li>
-        </ul>
-    </li>
-    <!-- Добавьте остальные таблицы по аналогии -->
-</ul>
+### 1.3 Description of Tables
+- **`age_group`**: Categories of user age groups.
+  - **Columns**:
+    - `id`: Unique identifier for the age group.
+    - `name`: Name of the age group (e.g., "18-24").
+- **`occupations`**: List of user occupations.
+  - **Columns**:
+    - `id`: Unique identifier for the occupation.
+    - `name`: Occupation name (e.g., "Engineer").
 
-<h3>1.4 ERD diagram</h3>
-<p>Nasledujúci diagram znázorňuje vzťahy medzi tabuľkami:</p>
-<img src="https://github.com/user-attachments/assets/ac1a3229-be95-470e-b670-55aceeaaeffb" alt="MovieLens_ERD">
+*(Extend this section for other tables as needed.)*
 
-<h2>2. Návrh dimenzionálneho modelu</h2>
+### 1.4 ERD Diagram
+The following diagram illustrates the relationships between the tables:
 
-<h3>2.1 Návrh dimenzionálneho modelu</h3>
-<p>
-    Pre projekt sme navrhli multi-dimenzionálny model typu hviezda, ktorý umožňuje efektívnu analýzu hodnotení filmov používateľmi. 
-    Model obsahuje faktovú tabuľku <strong>fact_ratings</strong> a viacero dimenzií.
-</p>
+![MovieLens ERD](https://github.com/user-attachments/assets/ac1a3229-be95-470e-b670-55aceeaaeffb)
 
-<h3>2.2 Hlavné tabuľky v modeli:</h3>
-<ul>
-    <li>
-        <strong>fact_ratings (Faktová tabuľka):</strong>
-        <ul>
-            <li>Obsahuje kľúčové metriky a prepojenie na dimenzie.</li>
-            <li>Atribúty:
-                <ul>
-                    <li>rating_id: Unikátny identifikátor hodnotenia.</li>
-                    <li>rating: Hodnotenie (1–5).</li>
-                    <li>rated_at: Dátum a čas hodnotenia.</li>
-                    <li>user_id: Identifikátor používateľa (väzba na dim_users).</li>
-                    <li>movie_id: Identifikátor filmu (väzba na dim_movies).</li>
-                    <li>dim_time_time_id: Identifikátor času (väzba na dim_time).</li>
-                </ul>
-            </li>
-        </ul>
-    </li>
-    <li>
-        <strong>dim_users (Dimenzia používateľov):</strong>
-        <ul>
-            <li>Obsahuje údaje o používateľoch, ako vekové skupiny a zamestnanie.</li>
-            <li>Atribúty:
-                <ul>
-                    <li>user_id: Unikátny identifikátor používateľa.</li>
-                    <li>gender: Pohlavie.</li>
-                    <li>age_group_id: Identifikátor vekovej skupiny.</li>
-                    <li>occupation_id: Identifikátor povolania.</li>
-                    <li>zip_code: PSČ používateľa.</li>
-                </ul>
-            </li>
-        </ul>
-    </li>
-    <!-- Добавьте остальные таблицы по аналогии -->
-</ul>
+---
 
-<h3>2.3 ERD diagram dimenzionálneho modelu</h3>
-<p>Model je vizualizovaný na nasledujúcom diagrame:</p>
-<img src="https://github.com/user-attachments/assets/cfcf6cb7-98c7-4b2e-87dc-cb67daa4f8d6" alt="Dimenzionálny model ERD">
-<h2>3. ETL proces v nástroji Snowflake</h2> <h3>3.1 Hlavné kroky ETL procesu</h3> <p> ETL proces pozostáva z troch hlavných krokov: <strong>Extract</strong> (extrakcia dát), <strong>Transform</strong> (transformácia dát) a <strong>Load</strong> (nahratie dát). Tento proces bol implementovaný v Snowflake na základe zdrojových dát vo formáte CSV. </p> <h3>3.2 Kroky a SQL príkazy</h3> <h4>3.2.1 Extract (Extrahovanie dát)</h4> <p> Dáta boli pripravené vo formáte CSV a uložené v lokálnom súborovom systéme. Následne boli nahraté do Snowflake pomocou STAGE `movielens_stage`. </p> <p><strong>Príkaz na vytvorenie STAGE:</strong></p> <pre> CREATE OR REPLACE STAGE movielens_stage; </pre> <p> Soubory boli nahrané do STAGE cez užívateľské rozhranie Snowflake. </p> <h4>3.2.2 Load (Nahratie dát do tabuliek)</h4> <p> CSV súbory boli nahraté do príslušných tabuliek pomocou príkazu <code>COPY INTO</code>. </p> <p><strong>Príklady:</strong></p> <ul> <li><strong>Tabuľka `age_group`:</strong></li> <pre> COPY INTO age_group FROM @movielens_stage/age_group.csv FILE_FORMAT = (TYPE = 'CSV' FIELD_OPTIONALLY_ENCLOSED_BY = '"' SKIP_HEADER = 1); </pre> <li><strong>Tabuľka `users`:</strong></li> <pre> COPY INTO users FROM @movielens_stage/users.csv FILE_FORMAT = (TYPE = 'CSV' FIELD_OPTIONALLY_ENCLOSED_BY = '"' SKIP_HEADER = 1); </pre> <li>Podobné príkazy boli použité pre ďalšie tabuľky: <code>tags</code>, <code>ratings</code>, <code>movies</code>, <code>genres</code>, <code>genres_movies</code>.</li> </ul> <h4>3.2.3 Transform (Transformácia dát)</h4> <p> Na základe nahraných dát boli vytvorené odvodené tabuľky pre analýzu. </p> <p><strong>Príklady:</strong></p> <ul> <li><strong>Priemerne hodnotenie filmov:</strong></li> <pre> CREATE OR REPLACE TABLE movie_avg_ratings AS SELECT movie_id, AVG(rating) AS avg_rating, COUNT(rating) AS total_ratings FROM ratings GROUP BY movie_id; </pre> <li><strong>Priradenie používateľov k vekovým skupinám:</strong></li> <pre> CREATE OR REPLACE TABLE user_age_groups AS SELECT u.id AS user_id, u.age, ag.name AS age_group_name FROM users u JOIN age_group ag ON u.age_group_id = ag.id; </pre> <li><strong>Počet filmov podľa žánrov:</strong></li> <pre> CREATE OR REPLACE TABLE genre_movie_count AS SELECT g.name AS genre_name, COUNT(gm.movie_id) AS total_movies FROM genres g JOIN genres_movies gm ON g.id = gm.genre_id GROUP BY g.name; </pre> </ul> <h3>3.3 Výsledky transformácie</h3> <p> Po úspešnom dokončení ETL procesu boli vytvorené nové analytické tabuľky, ktoré umožňujú odpovedať na nasledujúce otázky: </p> <ul> <li><strong>Ktoré filmy majú najvyššie priemerné hodnotenie?</strong></li> <li><strong>Ktoré žánre majú najviac filmov?</strong></li> <li><strong>Aké vekové skupiny sú najaktívnejšie v hodnotení filmov?</strong></li> </ul> <h4>Príklady výsledných dotazov:</h4> <ul> <li><strong>Top 10 filmov podľa priemerného hodnotenia:</strong></li> <pre> SELECT m.title, mar.avg_rating, mar.total_ratings FROM movie_avg_ratings mar JOIN movies m ON mar.movie_id = m.id ORDER BY mar.avg_rating DESC LIMIT 10; </pre> <li><strong>Top 10 žánrov podľa počtu filmov:</strong></li> <pre> SELECT * FROM genre_movie_count ORDER BY total_movies DESC LIMIT 10; </pre> </ul> <h3>3.4 Záver</h3> <p> Tento ETL proces efektívne pripravil dáta z databázy MovieLens pre analytické účely. Umožňuje odpovedať na dôležité otázky o preferenciách používateľov, populárnych filmoch a správaní rôznych vekových skupín. </p>
+## 2. Dimensional Model Design
+
+### 2.1 Dimensional Model Overview
+A star schema has been designed for efficient analysis of user ratings. The model includes:
+- **Fact table**: `fact_ratings`
+- **Dimension tables**: `dim_users`, `dim_movies`, `dim_time`, and others.
+
+### 2.2 Key Tables
+- **`fact_ratings` (Fact Table)**:
+  - **Attributes**:
+    - `rating_id`: Unique rating identifier.
+    - `rating`: Rating (1–5).
+    - `rated_at`: Date and time of the rating.
+    - `user_id`: User identifier (links to `dim_users`).
+    - `movie_id`: Movie identifier (links to `dim_movies`).
+    - `dim_time_time_id`: Time identifier (links to `dim_time`).
+
+- **`dim_users` (User Dimension)**:
+  - **Attributes**:
+    - `user_id`: Unique user identifier.
+    - `gender`: Gender.
+    - `age_group_id`: Age group identifier.
+    - `occupation_id`: Occupation identifier.
+    - `zip_code`: User's ZIP code.
+
+*(Extend this section for other dimension tables as needed.)*
+
+### 2.3 Dimensional Model ERD
+Visualization of the dimensional model:
+
+![Dimensional Model ERD](https://github.com/user-attachments/assets/cfcf6cb7-98c7-4b2e-87dc-cb67daa4f8d6)
+
+---
+
+## 3. ETL Process in Snowflake
+
+### 3.1 Main Steps in the ETL Process
+The ETL process involves three main steps: **Extract**, **Transform**, and **Load**, implemented using Snowflake based on CSV source files.
+
+### 3.2 Steps and SQL Commands
+
+#### 3.2.1 Extract (Data Extraction)
+Source data in CSV format was uploaded to a Snowflake stage.
+
+**Command to create stage:**
+```sql
+CREATE OR REPLACE STAGE movielens_stage;
