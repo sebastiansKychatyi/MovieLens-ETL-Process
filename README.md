@@ -1,6 +1,6 @@
 <h1>ETL Proces pre databázu MovieLens</h1>
-1. Úvod a popis zdrojových dát
-1.1 Téma projektu
+<h2>1. Úvod a popis zdrojových dát</h2>
+<h3>1.1 Téma projektu</h3>
 Tento projekt sa zameriava na analýzu údajov z databázy MovieLens. Dáta zahŕňajú informácie o používateľoch, filmoch, žánroch a používateľských hodnoteniach.
 Hlavným cieľom projektu je vytvoriť ETL proces v Snowflake na prípravu dát pre analýzu a budovanie modelu, ktorý umožňuje:
 
